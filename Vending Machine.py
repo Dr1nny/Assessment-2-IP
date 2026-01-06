@@ -1,7 +1,7 @@
 import time# A function to create time intervals for a specific amount
 import sys# Adds additional function
 
-wallet = float()
+wallet = float() #variable for the users balance
 vending_machine = {
     "1": {"Name":"Water       " , "Price" : 1.5},
     "2": {"Name":"Cola        " , "Price" : 2.5},
@@ -15,24 +15,24 @@ vending_machine = {
     "E": {"Name":"Cheese Bread" , "Price" : 6},
 }
 
-print("You've encountered a wild vending machine!")
+print("You've encountered a wild vending machine!")# the first thing that is displayed on the console
 time.sleep(1)# Gives 1 second for a user to read the text before moving on
     
-def InsertMoney():
+def InsertMoney(): # This function serves as a way to call back on inserting money
     global wallet
     while True:
         try:
             wallet = float(input("\nInsert Cash(1-10 AED allowed): "))
-            if wallet < 1 or wallet > 10:
+            if wallet < 1 or wallet > 10: # limiting the user to put cash lower than 1 or above 10
                 print("The amount you have given is subceeding/exceeding the limit, 1-10 AED Only.")
             else:
                 print(f"\n Accepted {wallet} AED")
                 time.sleep(1)
                 break
-        except ValueError:
+        except ValueError: # will deny request taken from non-values
             print("Letters are not taken as cash.")
 
-def Goodbye():
+def Goodbye(): # another function that will help ending the prgram
     print("\nThank you for shopping at the Wild Vending Machine! See you next time!")
     if wallet >= 1:
         print(f"Dispensing remaining cash: {wallet} AED")
@@ -48,7 +48,7 @@ def vendingGuide(): # creating a define function to display vending machine with
     print("====================================================")
 vendingGuide()
 
-def encounter(option): 
+def encounter(option): # the encounter function whether to interact or to run away
         if option == 1:
             print("You approached the wild vending machine,\n you notice there are items displayed with names and prices,\n how much money will you put in the vending machine?")
             time.sleep(3)
@@ -69,18 +69,18 @@ while True:
         print("Alphabets are not numbers!")
 encounter(option)
 
-def vendingProcess():
+def vendingProcess(): #The entire process of how the vending machine operates
     global wallet
-    InsertMoney()
-    vendingGuide()
+    InsertMoney() # will ask to insert money
+    vendingGuide() # create a display function to show to the user
     print("\nWhat would you like to purchase? Enter with the corresponding number or letter to dispense item.")
     time.sleep(1)
-    while True:
-        choice = input("\nCode: ").upper()
+    while True: #creating a loop to ensure if the user makes an error, they can try again
+        choice = input("\nCode: ").upper()#askes the user to select the corresponding code from the vending machine
         if choice in vending_machine:
-            item = vending_machine[choice]
-            price = item["Price"]
-            
+            item = vending_machine[choice] #takes the users input and checks the values stored in the dictionary from the vending machine
+            price = item["Price"]# takes the price from the selected dictionary in the vending machine
+            #displays item name with the according price with your balance
             print(f"\nYou selected: {item['Name']}")
             print(f"Price: {price} AED")
             print(f"Your balance: {wallet} AED")
@@ -88,15 +88,15 @@ def vendingProcess():
                 wallet -= price
                 print(f"Remaining amount: {wallet}")
                 time.sleep(2)
-                continueshopping = input("Would you like to continue shopping? (Y/N): ").upper()
-                if continueshopping == "Y":
+                continueshopping = input("Would you like to continue shopping? (Y/N): ").upper() 
+                if continueshopping == "Y":# If user enters "Y", it will continue to run the vending machine until the user wants to stop.
                     vendingGuide()
-                    print(f"Current Amount: {wallet}")
+                    print(f"Current Amount: {wallet}")# will display the current amount to help user manage cash.
                     continue
                 else:
-                    Goodbye()
+                    Goodbye()#ends the program and dispenses any remaining amount
                 break
-            else:
+            else:# If a user has insufficient funds, it will ask to either add more money or not which will end up closing the program.
                 time.sleep(1)
                 print("\nInsufficient Funds!")
                 time.sleep(2)
@@ -106,12 +106,13 @@ def vendingProcess():
                     while True:
                         try:
                             additional_cash = float(input("Insert Extra Cash: "))
-                            if additional_cash < 1 or additional_cash > 10:
+                            if additional_cash < 1 or additional_cash > 10: #works exactly as how the function InsertMoney() but for additional cash.
                                 print("Additional cash must be 1-10 AED only")
                                 continue
                             if wallet + additional_cash > 10:
                                 print("The added cash has exceeded the limit of the vending machine")
                                 continue
+                            #Creates a satisfying display of showing the previous amount and simulating inserting cash and adding up the additional cash with the current wallet which asks to choose the same item or choose a new one.
                             time.sleep(0.5)
                             print(f"\nPrevious amount: {wallet}")
                             time.sleep(1)
@@ -122,11 +123,11 @@ def vendingProcess():
                             time.sleep(1)
                             print("\nPlease enter the code again or choose a new item.")
                             time.sleep(1)
-                            vendingGuide()
+                            vendingGuide()#will display the vending machine screen for easier access instead of having to scroll
                             break
                         except ValueError:
                             print("Error! Cash not detected")
-                else:
+                else:#any answer that isnt "Y" will immediately close the program
                     Goodbye()
         else:
             print("Invalid Code, try again")
