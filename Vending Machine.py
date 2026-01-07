@@ -86,12 +86,12 @@ def vendingProcess(): #The entire process of how the vending machine operates
             print(f"Your balance: {wallet} AED")
             if wallet >= price:
                 wallet -= price
-                print(f"Remaining amount: {wallet}")
+                print(f"Remaining amount: {wallet} AED")
                 time.sleep(2)
                 continueshopping = input("Would you like to continue shopping? (Y/N): ").upper() 
                 if continueshopping == "Y":# If user enters "Y", it will continue to run the vending machine until the user wants to stop.
                     vendingGuide()
-                    print(f"Current Amount: {wallet}")# will display the current amount to help user manage cash.
+                    print(f"Current Amount: {wallet} AED")# will display the current amount to help user manage cash.
                     continue
                 else:
                     Goodbye()#ends the program and dispenses any remaining amount
@@ -114,12 +114,12 @@ def vendingProcess(): #The entire process of how the vending machine operates
                                 continue
                             #Creates a satisfying display of showing the previous amount and simulating inserting cash and adding up the additional cash with the current wallet which asks to choose the same item or choose a new one.
                             time.sleep(0.5)
-                            print(f"\nPrevious amount: {wallet}")
+                            print(f"\nPrevious amount: {wallet} AED")
                             time.sleep(1)
                             print("Inserting cash...")
                             time.sleep(1.5)
                             wallet += additional_cash
-                            print(f"Current amount: {wallet}")
+                            print(f"Current amount: {wallet} AED")
                             time.sleep(1)
                             print("\nPlease enter the code again or choose a new item.")
                             time.sleep(1)
@@ -132,3 +132,4 @@ def vendingProcess(): #The entire process of how the vending machine operates
         else:
             print("Invalid Code, try again")
 vendingProcess()
+
